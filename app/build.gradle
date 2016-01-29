@@ -1,0 +1,35 @@
+apply plugin: 'com.android.application'
+
+android {
+
+    /*
+     * 编译版本专门调整为22，可以解决在Android6.0版本以上且在x64架构下的崩溃问题。
+     * 后续更好的解决办法，有待更新
+     */
+
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        applicationId "com.sina.playerdemo_v2"
+        minSdkVersion 10
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile project(':Library.Player')
+}
